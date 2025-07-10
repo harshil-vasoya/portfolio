@@ -72,7 +72,7 @@ function Hero() {
           </h1>
 
           <p ref={descriptionRef} className="text-lg text-muted-foreground sm:text-xl">
-            creator of&nbsp;
+            Creator of&nbsp;
             <a
               href="https://simplepg.com/"
               className="text-blue-500"
