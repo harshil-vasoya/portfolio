@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLinkIcon } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import SimplePgImg from "@/assets/images/projects/simplepg.png";
-import DisuntImg from "@/assets/images/projects/disunt.webp";
 import ProstarCNC from "@/assets/images/projects/prostarcnc.webp";
 import CrmTools from "@/assets/images/projects/crmtools.webp";
 
@@ -37,17 +39,94 @@ const projects = [
 ];
 
 export default function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Title animation
+    gsap.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Cards stagger animation
+    const cards = cardsRef.current?.querySelectorAll('.project-card');
+    if (cards) {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+
+    // Hover animations for cards
+    cards?.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { 
+          scale: 1.02, 
+          duration: 0.3, 
+          ease: "power2.out",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+        });
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { 
+          scale: 1, 
+          duration: 0.3, 
+          ease: "power2.out",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+        });
+      });
+    });
+
+    return () => {
+      // Cleanup
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      cards?.forEach((card) => {
+        card.removeEventListener('mouseenter', () => {});
+        card.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
+
   return (
-    <section id="projects" className="py-14">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">Featured Projects</h2>
+    <section ref={sectionRef} id="projects" className="py-14">
+      <h2 ref={titleRef} className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">Featured Projects</h2>
       <div className="flex justify-end p-4">
         <Link to="/projects" className="font-bold flex items-center gap-2">
           View all projects <CircleArrowRight className="h-5 w-5" />
         </Link>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div ref={cardsRef} className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <Card key={project.title} className="flex flex-col overflow-hidden transition-all hover:shadow-lg">
+          <Card key={project.title} className="project-card flex flex-col overflow-hidden transition-all hover:shadow-lg">
             <CardHeader className="p-0">
               <div className="relative aspect-video overflow-hidden">
                 <img src={project.image} alt={project.title} className="object-cover transition-all hover:scale-105" />

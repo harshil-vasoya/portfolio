@@ -9,7 +9,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IconType } from "react-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { FaReact } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
@@ -148,15 +150,93 @@ const useIsMobile = () => {
 
 export default function Skills() {
   const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Title animation
+    gsap.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Skills cards stagger animation
+    const cards = cardsRef.current?.querySelectorAll('.skill-card');
+    if (cards) {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 100, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+
+    // Hover animations for skill cards
+    const skillCards = cardsRef.current?.querySelectorAll('.skill-card');
+    skillCards?.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { 
+          scale: 1.05, 
+          duration: 0.3, 
+          ease: "power2.out",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+        });
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { 
+          scale: 1, 
+          duration: 0.3, 
+          ease: "power2.out",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+        });
+      });
+    });
+
+    return () => {
+      // Cleanup
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      skillCards?.forEach((card) => {
+        card.removeEventListener('mouseenter', () => {});
+        card.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
 
   return (
-    <section id="skills" className="w-full py-14">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+    <section ref={sectionRef} id="skills" className="w-full py-14">
+      <h2 ref={titleRef} className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
         Skills & Technologies
       </h2>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div ref={cardsRef} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {skills.map((skill) => (
-          <Card key={skill.category} className="overflow-hidden">
+          <Card key={skill.category} className="skill-card overflow-hidden">
             <CardHeader className="pb-4">
               <CardTitle className="text-lg flex gap-2 items-center">
                 <skill.icon className="w-5 h-5" /> {skill.category}
