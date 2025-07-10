@@ -65,7 +65,7 @@ function Hero() {
     <section ref={heroRef} className="my-4 flex flex-col md:flex-row gap-4 py-36 md:py-10">
       <div className="p-7 w-full flex flex-col gap-5 justify-center">
         <div className="space-y-4">
-          <h1 ref={titleRef} className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
+          <h1 ref={titleRef} className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-gradient">
             Hi, I'm Harshil Vasoya
             <br className="" />
             Student Of Computer Science
