@@ -7,6 +7,8 @@ import DisuntImg from "@/assets/images/projects/disunt.webp";
 import ProstarCNC from "@/assets/images/projects/prostarcnc.webp";
 import CrmTools from "@/assets/images/projects/crmtools.webp";
 import PlexusImg from "@/assets/images/projects/plexus.png";
+import GfmImg from "@/assets/images/projects/gfm.png";
+import GoCleanerImg from "@/assets/images/projects/goCleaner.png";
 
 const projects = [
   {
@@ -47,6 +49,22 @@ const projects = [
     image: PlexusImg,
     technologies: ["PHP", "HTML", "CSS", "Bootstrap"],
     demoLink: "https://plexusorthotech.com/",
+  },
+  {
+    title: "GFM",
+    description:
+      "website of an implant company build with Next js. just portfolio website",
+    image: GfmImg,
+    technologies: ["Next Js", "ShadCn UI"],
+    demoLink: "https://www.econestsolutions.co.in/",
+  },
+  {
+    title: "Go Cleaner",
+    description:
+      "website of an cleaning company build with Next js. just portfolio website",
+    image: GoCleanerImg,
+    technologies: ["Next Js", "ShadCn UI"],
+    demoLink: "https://https://go-cleaner.com/",
   },
 ];
 
