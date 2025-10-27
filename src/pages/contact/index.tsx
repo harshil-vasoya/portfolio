@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Mail, Github, Linkedin, Twitter, Instagram, Phone } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -185,6 +185,19 @@ export default function ContactPage() {
               <p className="text-sm text-muted-foreground">{Constant.email}</p>
             </div>
           </a>
+          <a
+            href={"tel:" + Constant.mobile}
+            className="social-link group flex flex-col items-center gap-4 p-8 rounded-xl border border-border bg-card hover:bg-accent/50 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900/20 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/30 transition-colors">
+              <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div className="text-center">
+              <h3 className="font-semibold text-lg text-foreground">Mobile</h3>
+              <p className="text-sm text-muted-foreground">{Constant.mobile}</p>
+            </div>
+          </a>
+          
         </div>
       </div>
     </div>

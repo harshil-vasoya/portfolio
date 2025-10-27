@@ -3,7 +3,6 @@ import About from "./about";
 import Skills from "./skills";
 import Projects from "./projects";
 import Language from "./language";
-import ContinuousWaterfall from "@/components/shared/continuous-waterfall";
 import ParticleSystem from "@/components/shared/particle-system";
 import "./style.scss";
 

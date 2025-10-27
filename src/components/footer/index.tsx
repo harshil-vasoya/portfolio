@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Instagram, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Constants from "@/config/constant";
 
@@ -103,6 +103,14 @@ function Footer() {
               <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
               <span className="sr-only">Email</span>
             </a>
+            <a 
+              href={"tel:" + Constants.mobile}
+              className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/20 transition-colors duration-200 group"
+            >
+              <Phone className="h-5 w-5 text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
+              <span className="sr-only">Mobile</span>
+            </a>
+
           </div>
         </div>
       </div>

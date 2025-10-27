@@ -66,9 +66,9 @@ function Hero() {
       <div className="p-7 w-full flex flex-col gap-5 justify-center">
         <div className="space-y-4">
           <h1 ref={titleRef} className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent animate-gradient">
-            Hi, I'm Harshil Vasoya
+            Hi, I'm Harshil Director at 
             <br className="" />
-            Student Of Computer Science
+            Ullas India IT Solutions Limited
           </h1>
 
           <p ref={descriptionRef} className="text-lg text-muted-foreground sm:text-xl">
@@ -79,14 +79,6 @@ function Hero() {
               target="_blank"
             >
               simplepg.com
-            </a>
-            , Director of{" "}
-            <a
-              href="https://ullasindia.com//"
-              className="text-blue-500"
-              target="_blank"
-            >
-              Ullas India IT Solutions Limited
             </a>
             .
             <br /> loves to build things that people can use.

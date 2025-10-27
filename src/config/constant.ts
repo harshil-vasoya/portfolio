@@ -6,4 +6,5 @@ export default {
   email: "harshilvasoya2812@gmail.com",
   phone: "+91 7096412310",
   instagram: "https://www.instagram.com/_harshilvasoya_/",
+  mobile: "7096412310",
 };
